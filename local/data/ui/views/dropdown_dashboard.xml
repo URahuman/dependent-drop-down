@@ -1,0 +1,65 @@
+<form version="1.1" theme="dark">
+  <label>dropdown_dashboard</label>
+  <fieldset submitButton="false">
+    <input type="dropdown" token="country">
+      <label>Country</label>
+      <choice value="*">All</choice>
+      <fieldForLabel>country</fieldForLabel>
+      <fieldForValue>country</fieldForValue>
+      <search>
+        <query>index="dropdown_idx" | search name=$name$  | stats count by country</query>
+        <earliest>0</earliest>
+        <latest></latest>
+      </search>
+      <default>*</default>
+    </input>
+    <input type="dropdown" token="name">
+      <label>city</label>
+      <choice value="*">All</choice>
+      <fieldForLabel>name</fieldForLabel>
+      <fieldForValue>name</fieldForValue>
+      <search>
+        <query>index="dropdown_idx" | search country=$country$ | stats count by name</query>
+        <earliest>0</earliest>
+        <latest></latest>
+      </search>
+      <default>*</default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <chart>
+        <search>
+          <query>index="dropdown_idx" | search name=$name$  | stats count by country</query>
+          <earliest>0</earliest>
+          <latest></latest>
+        </search>
+        <option name="charting.chart">pie</option>
+        <option name="charting.drilldown">none</option>
+      </chart>
+    </panel>
+    <panel>
+      <single>
+        <search>
+          <query>index="dropdown_idx"  | stats count by name | stats count</query>
+          <earliest>0</earliest>
+          <latest></latest>
+        </search>
+        <option name="drilldown">none</option>
+      </single>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <chart>
+        <search>
+          <query>index="dropdown_idx"  | stats count by  "sub country"</query>
+          <earliest>0</earliest>
+          <latest></latest>
+        </search>
+        <option name="charting.chart">pie</option>
+        <option name="charting.drilldown">none</option>
+      </chart>
+    </panel>
+  </row>
+</form>

@@ -1,0 +1,19 @@
+[app/ui]
+version = 9.0.1
+modtime = 1668231701.026282400
+
+[app/launcher]
+version = 9.0.1
+modtime = 1668231701.064951200
+
+[indexes/dropdown_idx]
+owner = admin
+version = 9.0.1
+modtime = 1668231836.766049000
+
+[views/dropdown_dashboard]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = admin
+version = 9.0.1
+modtime = 1668235449.542201500
